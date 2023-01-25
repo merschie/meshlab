@@ -136,57 +136,58 @@ if(NOT DEFINED MESHLAB_PLUGINS) # it may be already defined in parent directory
 		meshlabplugins/io_txt
 		meshlabplugins/io_u3d
 		meshlabplugins/io_x3d
-
-		# Filter plugins
-		meshlabplugins/filter_sample
-		meshlabplugins/filter_createiso
-		meshlabplugins/filter_geodesic
-		meshlabplugins/filter_sample_gpu
-		meshlabplugins/filter_ao
-		meshlabplugins/filter_camera
-		meshlabplugins/filter_clean
-		meshlabplugins/filter_color_projection
-		meshlabplugins/filter_colorproc
-		meshlabplugins/filter_create
-		meshlabplugins/filter_cubization
-		meshlabplugins/filter_developability
-		meshlabplugins/filter_dirt
-		meshlabplugins/filter_fractal
-		meshlabplugins/filter_func
-		meshlabplugins/filter_img_patch_param
-		meshlabplugins/filter_icp
-		meshlabplugins/filter_io_nxs
-		meshlabplugins/filter_isoparametrization
-		meshlabplugins/filter_layer
-		meshlabplugins/filter_measure
-		meshlabplugins/filter_mesh_booleans
-		meshlabplugins/filter_meshing
-		meshlabplugins/filter_mls
-		meshlabplugins/filter_mutualglobal
-		meshlabplugins/filter_mutualinfo
-		meshlabplugins/filter_parametrization
-		meshlabplugins/filter_plymc
-		meshlabplugins/filter_qhull
-		meshlabplugins/filter_quality
-		meshlabplugins/filter_sampling
-		meshlabplugins/filter_screened_poisson
-		meshlabplugins/filter_sdfgpu
-		meshlabplugins/filter_select
-		meshlabplugins/filter_sketchfab
-		meshlabplugins/filter_ssynth
-		meshlabplugins/filter_texture
-		meshlabplugins/filter_texture_defragmentation
-		meshlabplugins/filter_trioptimize
-		meshlabplugins/filter_unsharp
-		meshlabplugins/filter_voronoi
-
-		# Rendering and Decoration Plugins
-		meshlabplugins/render_gdp
-		meshlabplugins/render_radiance_scaling
-		meshlabplugins/decorate_base
-		meshlabplugins/decorate_background
-		meshlabplugins/decorate_raster_proj
-		meshlabplugins/decorate_shadow
+#
+#		# Filter plugins
+#		meshlabplugins/filter_sample
+#		meshlabplugins/filter_createiso
+#		meshlabplugins/filter_geodesic
+#		meshlabplugins/filter_sample_gpu
+#		meshlabplugins/filter_ao
+#		meshlabplugins/filter_camera
+#		meshlabplugins/filter_clean
+#		meshlabplugins/filter_color_projection
+#		meshlabplugins/filter_colorproc
+#		meshlabplugins/filter_create
+#		meshlabplugins/filter_cubization
+#		meshlabplugins/filter_developability
+#		meshlabplugins/filter_dirt
+#		meshlabplugins/filter_fractal
+#		meshlabplugins/filter_func
+#		meshlabplugins/filter_img_patch_param
+#		meshlabplugins/filter_icp
+#		meshlabplugins/filter_io_nxs
+#		meshlabplugins/filter_isoparametrization
+		meshlabplugins/filter_iSPR
+#		meshlabplugins/filter_layer
+#		meshlabplugins/filter_measure
+#		meshlabplugins/filter_mesh_booleans
+#		meshlabplugins/filter_meshing
+#		meshlabplugins/filter_mls
+#		meshlabplugins/filter_mutualglobal
+#		meshlabplugins/filter_mutualinfo
+#		meshlabplugins/filter_parametrization
+#		meshlabplugins/filter_plymc
+#		meshlabplugins/filter_qhull
+#		meshlabplugins/filter_quality
+#		meshlabplugins/filter_sampling
+#		meshlabplugins/filter_screened_poisson
+#		meshlabplugins/filter_sdfgpu
+#		meshlabplugins/filter_select
+#		meshlabplugins/filter_sketchfab
+#		meshlabplugins/filter_ssynth
+#		meshlabplugins/filter_texture
+#		meshlabplugins/filter_texture_defragmentation
+#		meshlabplugins/filter_trioptimize
+#		meshlabplugins/filter_unsharp
+#		meshlabplugins/filter_voronoi
+#
+#		# Rendering and Decoration Plugins
+#		meshlabplugins/render_gdp
+#		meshlabplugins/render_radiance_scaling
+#		meshlabplugins/decorate_base
+#		meshlabplugins/decorate_background
+#		meshlabplugins/decorate_raster_proj
+#		meshlabplugins/decorate_shadow
 
 		# Edit Plugins
 		meshlabplugins/edit_sample

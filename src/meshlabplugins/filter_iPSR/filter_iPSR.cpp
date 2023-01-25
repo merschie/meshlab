@@ -377,7 +377,7 @@ RichParameterList FilterScreenedPoissonPlugin::initParameterList(
                                             10,
                                             "Samples per Node",
                                             "The depth parameter of screened Poisson surface reconstruction. It is the maximum possible depth of the octree. The default value of this parameter is 10.\n"));
-            parlist.addParam(RichFloat ("neighbors",
+            parlist.addParam(RichInt ("neighbors",
                                              10,
                                              "number of neighbors",
                                              "The number of the closest sample points to search from every reconstructed triangle face. The suggested range is between 10 and 20. The default value of this parameter is 10.\n"));
