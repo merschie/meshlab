@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: BSL-1.0
 
 
-set(SOURCES	filter_iSPR.cpp)
+set(SOURCES	filter_iPSR.cpp)
 
 set(HEADERS
 	src/Allocator.h
@@ -30,7 +30,7 @@ set(HEADERS
 	src/Window.h
 	src/kdtree.h
 	src/utility.h
-	filter_iSPR.h
+	filter_iPSR.h
 	#poisson_utils.h
 	)
 
@@ -57,11 +57,11 @@ set(sNL_HEADERS
 	src/SparseMatrix.inl
 	src/SparseMatrixInterface.inl
 	src/Window.inl)
-add_meshlab_plugin(filter_iSPR ${SOURCES} ${HEADERS} ${INL_HEADERS})
+add_meshlab_plugin(filter_iPSR ${SOURCES} ${HEADERS} ${INL_HEADERS})
 
-target_compile_definitions(filter_iSPR PRIVATE BRUNO_LEVY_FIX
+target_compile_definitions(filter_iPSR PRIVATE BRUNO_LEVY_FIX
 														   FOR_RELEASE)
 
 if(OpenMP_CXX_FOUND)
-	target_link_libraries(filter_iSPR PRIVATE OpenMP::OpenMP_CXX)
+	target_link_libraries(filter_iPSR PRIVATE OpenMP::OpenMP_CXX)
 endif()
