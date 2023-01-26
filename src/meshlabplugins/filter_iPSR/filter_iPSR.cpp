@@ -303,6 +303,18 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 		pm->cm.vn++;		
 	}
 
+	//add faces
+	for (int i = 0; i < mesh.second.size(); i++) {
+		//convert the face to meshlab format
+		CFaceO f;
+		f.V(0) = &pm->cm.vert[mesh.second[i][0]];
+		f.V(1) = &pm->cm.vert[mesh.second[i][1]];
+		f.V(2) = &pm->cm.vert[mesh.second[i][2]];
+		//add the face to the mesh
+		pm->cm.face.push_back(f);
+		//correct the number of faces
+		pm->cm.fn++;
+	}
 	
 
 
