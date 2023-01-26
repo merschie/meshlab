@@ -26,9 +26,9 @@
 #include <Psapi.h>
 #endif
 
-#include <QDir>
-#include <QTemporaryDir>
-#include <QTemporaryFile>
+//#include <QDir>
+//#include <QTemporaryDir>
+//#include <QTemporaryFile>
 
 #include <thread>
 
@@ -46,7 +46,7 @@
 
 
 
-#include "filter_iSPR.h"
+#include "filter_iPSR.h"
 //#include "poisson_utils.h"
 
 
@@ -129,18 +129,39 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 		unsigned int& /*postConditionMask*/,
 		vcg::CallBackPos* cb)
 {
+	//parse the parameters
+	int iters =params.getInt("iters");
+	int pointweight =params.getInt("pointWeight");
+	int depth =params.getInt("depth");
+	int k_neighbors =params.getInt("neighbors");
+
+	log("iters: %d",iters);
+	log("pointweight: %d",pointweight);
+	log("depth: %d",depth);
+	log("k_neighbors: %d",k_neighbors);
+
+
 
 	typedef double REAL;
 	const unsigned int DIM = 3U;
     vector<pair<Point<double, 3>, NormaliSPR<double, 3>>> points_normals;
 	//cancel read in, use mesh from meshlab
 	//ply_reader<REAL, DIM>(input_name, points_normals);
+
+	//fill points_normals with meshlab mesh
+	NormaliSPR<REAL, DIM> n(Point<REAL, DIM>(1, 0, 0));
+
+
+	for (int i = 0; i < md.mm()->cm.vert.size(); i++) {
+		Point<REAL, DIM> p;
+		p[0] = md.mm()->cm.vert[i].P()[0];
+		p[1] = md.mm()->cm.vert[i].P()[1];
+		p[2] = md.mm()->cm.vert[i].P()[2];
+		points_normals.push_back(make_pair(p, n));
+	}
+
 	
-	//parse the parameters
-	int iters =params.getInt("iters");
-	int pointweight =params.getInt("pointWeight");
-	int depth =params.getInt("depth");
-	int k_neighbors =params.getInt("neighbors");
+
 
 
 	string command = "PoissonRecon --in i.ply --out o.ply --bType 2 --depth " + to_string(depth) + " --pointWeight " + to_string(pointweight);
@@ -156,7 +177,7 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 	points_normals = sample_points<REAL, DIM>((int)argv_str.size(), argv_str.data(), points_normals, iXForm, &weight_samples);
 
 	// initialize normals randomly
-	printf("random initialization...\n");
+	log("random initialization...\n");
 	NormaliSPR<REAL, DIM> zero_normal(Point<REAL, DIM>(0, 0, 0));
 	srand(0);
 	for (size_t i = 0; i < points_normals.size(); ++i)
@@ -188,7 +209,7 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 	while (epoch < iters)
 	{
 		++epoch;
-		printf("Iter: %d\n", epoch);
+		log("Iter: %d\n", epoch);
 
 		vector<Point<REAL, DIM>>().swap(mesh.first);
 		vector<vector<int>>().swap(mesh.second);
@@ -257,12 +278,36 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 			min_heap.pop();
 		}
 		ave_max_diff /= heap_size;
-		printf("normals variation %f\n", ave_max_diff);
+		log("normals variation %f\n", ave_max_diff);
 		if (ave_max_diff < 0.175)
 			break;
 	}
 
 	mesh = poisson_reconstruction<REAL, DIM>((int)argv_str.size(), argv_str.data(), points_normals, &weight_samples);
+
+
+	//convert mesh to meshlab format
+	MeshModel *pm =md.addNewMesh("","iPSR Mesch",false);
+	
+	//add vertices
+	for (int i = 0; i < mesh.first.size(); i++) {
+		Point<REAL, DIM> p = mesh.first[i];
+		//convert the point to meshlab format
+		CVertexO v;
+		v.P()[0] = p[0];
+		v.P()[1] = p[1];
+		v.P()[2] = p[2];
+		//add the vertex to the mesh
+		pm->cm.vert.push_back(v);
+		//correct the number of vertices
+		pm->cm.vn++;		
+	}
+
+	
+
+
+
+
 
 	// bool currDirChanged=false;
 	// QDir currDir = QDir::current();
