@@ -144,7 +144,7 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 
 	typedef double REAL;
 	const unsigned int DIM = 3U;
-    vector<pair<Point<double, 3>, NormaliSPR<double, 3>>> points_normals;
+    vector<pair<Point<REAL, 3>, NormaliSPR<REAL, 3>>> points_normals;
 	//cancel read in, use mesh from meshlab
 	//ply_reader<REAL, DIM>(input_name, points_normals);
 
@@ -287,16 +287,16 @@ std::map<std::string, QVariant> FilterScreenedPoissonPlugin::applyFilter(
 
 
 	//convert mesh to meshlab format
-	MeshModel *pm =md.addNewMesh("","iPSR Mesch",false);
+	MeshModel *pm =md.addNewMesh("","iPSR Mesh",false);
 	
 	//add vertices
 	for (int i = 0; i < mesh.first.size(); i++) {
 		Point<REAL, DIM> p = mesh.first[i];
 		//convert the point to meshlab format
 		CVertexO v;
-		v.P()[0] = p[0];
-		v.P()[1] = p[1];
-		v.P()[2] = p[2];
+		v.P()[0] = p[0]*iXForm.coords[0][0]+iXForm.coords[3][0];
+		v.P()[1] = p[1]*iXForm.coords[1][1]+iXForm.coords[3][1];
+		v.P()[2] = p[2]*iXForm.coords[2][2]+iXForm.coords[3][2];
 		//add the vertex to the mesh
 		pm->cm.vert.push_back(v);
 		//correct the number of vertices
