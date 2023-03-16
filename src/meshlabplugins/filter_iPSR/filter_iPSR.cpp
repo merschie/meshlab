@@ -298,7 +298,7 @@ std::map<std::string, QVariant> FilteriPSRPlugin::applyFilter(
 			ave_max_diff /= heap_size;
 			log("normals variation %f\n", ave_max_diff);
 			md.delMesh(pm->id());
-			if (ave_max_diff < 0.100075)
+			if (ave_max_diff < 0.175)
 				break;
 
 
