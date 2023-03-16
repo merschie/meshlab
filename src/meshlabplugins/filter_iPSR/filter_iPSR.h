@@ -26,7 +26,7 @@
 
 #include <common/plugins/interfaces/filter_plugin.h>
 
-class FilterScreenedPoissonPlugin : public QObject, public FilterPlugin
+class FilteriPSRPlugin : public QObject, public FilterPlugin
 {
 	Q_OBJECT
 	MESHLAB_PLUGIN_IID_EXPORTER(FILTER_PLUGIN_IID)
@@ -37,8 +37,8 @@ public:
 		FP_SCREENED_POISSON
 	};
 
-	FilterScreenedPoissonPlugin();
-	~FilterScreenedPoissonPlugin();
+	FilteriPSRPlugin();
+	~FilteriPSRPlugin();
 
 	QString pluginName() const;
 	QString filterName(ActionIDType filter) const;

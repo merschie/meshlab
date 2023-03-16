@@ -2,61 +2,58 @@
 # SPDX-License-Identifier: BSL-1.0
 
 
-set(SOURCES	filter_iPSR.cpp)
+set(SOURCES
+	filter_iPSR.cpp Src/MarchingCubes.cpp
+	# Src/CmdLineParser.cpp
+	Src/Factor.cpp Src/Geometry.cpp)
 
 set(HEADERS
-	src/Allocator.h
-	src/Array.h
-	src/BSplineData.h
-	src/BinaryNode.h
-	src/CmdLineParser.h
-	src/FEMTree.h
-	src/Factor.h
-	src/FunctionData.h
-	src/Geometry.h
-	src/LinearSolvers.h
-	src/MAT.h
-	src/MarchingCubes.h
-	src/MyMiscellany.h
-	src/PPolynomial.h
-	src/Ply.h
-	src/PointStream.h
-	src/PointStreamData.h
-	src/PoissonRecon.h
-	src/Polynomial.h
-	src/RegularTree.h
-	src/SparseMatrix.h
-	src/SparseMatrixInterface.h
-	src/Window.h
-	src/kdtree.h
-	src/utility.h
+	Src/Allocator.h
+	Src/Array.h
+	Src/BSplineData.h
+	Src/BinaryNode.h
+	Src/CmdLineParser.h
+	Src/Factor.h
+	Src/FunctionData.h
+	Src/Geometry.h
+	Src/Hash.h
+	Src/MAT.h
+	Src/MarchingCubes.h
+	Src/MemoryUsage.h
+	Src/MultiGridOctreeData.h
+	Src/MyTime.h
+	Src/Octree.h
+	Src/PPolynomial.h
+	Src/PlyVertexMini.h
+	Src/PointStream.h
+	Src/Polynomial.h
+	Src/SparseMatrix.h
+	Src/Time.h
+	Src/Vector.h
+	Src/kdtree.h
 	filter_iPSR.h
-	#poisson_utils.h
-	)
+	poisson_utils.h)
 
-set(sNL_HEADERS
-	src/Array.inl
-	src/BMPStream.inl
-	src/BSplineData.inl
-	src/CmdLineParser.inl
-	src/FEMTree.Evaluation.inl
-	src/FEMTree.Initialize.inl
-	src/FEMTree.IsoSurface.specialized.inl
-	src/FEMTree.SortedTreeNodes.inl
-	src/FEMTree.System.inl
-	src/FEMTree.WeightedSamples.inl
-	src/FEMTree.inl
-	src/FunctionData.inl
-	src/Geometry.inl
-	src/MAT.inl
-	src/PPolynomial.inl
-	src/PointStream.inl
-	src/PoissonRecon.inl
-	src/Polynomial.inl
-	src/RegularTree.inl
-	src/SparseMatrix.inl
-	src/SparseMatrixInterface.inl
-	src/Window.inl)
+set(INL_HEADERS
+	Src/Array.inl
+	Src/BSplineData.inl
+	Src/CmdLineParser.inl
+	Src/FunctionData.inl
+	Src/Geometry.inl
+	Src/MAT.inl
+	Src/MultiGridOctreeData.Evaluation.inl
+	Src/MultiGridOctreeData.inl
+	Src/MultiGridOctreeData.IsoSurface.inl
+	Src/MultiGridOctreeData.SortedTreeNodes.inl
+	Src/MultiGridOctreeData.System.inl
+	Src/MultiGridOctreeData.WeightedSamples.inl
+	Src/Octree.inl
+	Src/PointStream.inl
+	Src/Polynomial.inl
+	Src/PPolynomial.inl
+	Src/SparseMatrix.inl
+	Src/Vector.inl)
+
 add_meshlab_plugin(filter_iPSR ${SOURCES} ${HEADERS} ${INL_HEADERS})
 
 target_compile_definitions(filter_iPSR PRIVATE BRUNO_LEVY_FIX
