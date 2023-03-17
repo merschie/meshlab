@@ -261,9 +261,13 @@ std::map<std::string, QVariant> FilteriPSRPlugin::applyFilter(
 				}
 			}
 			//still need to normilize
-			//for (int i = 0; i < (int)projective_normals.size(); ++i)
-			//	projective_normals[i].normalize();
-			
+			for (int i = 0; i < (int)projective_normals.size(); ++i)
+			{
+				float factor = vcg::math::Sqrt(projective_normals[i][0]*projective_normals[i][0] + projective_normals[i][1]*projective_normals[i][1] + projective_normals[i][2]*projective_normals[i][2]);
+				projective_normals[i][0] /= factor;
+				projective_normals[i][1] /= factor;
+				projective_normals[i][2] /= factor;
+			}
 			// compute the average normal variation of the top 1/1000 points
 			size_t heap_size = static_cast<size_t>(ceil(mn.vn / 1000.0));
 			priority_queue<double, vector<double>, greater<double>> min_heap;
